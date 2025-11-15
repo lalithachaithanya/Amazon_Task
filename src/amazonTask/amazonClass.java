@@ -3,7 +3,6 @@ package amazonTask;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Driver;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -11,7 +10,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import com.google.common.io.Files;
 
 public class amazonClass {
@@ -25,8 +23,8 @@ public class amazonClass {
 		Files.copy(sc, imgpath);
 	}
 	
-	public static void screenshotusingelement(WebElement ele, String im) throws IOException {
-		
+	public static void screenshot(WebElement ele, String im) throws IOException {
+ 		
 		File sc = ele.getScreenshotAs(OutputType.FILE);
 		File imgPath = new File("C:\\Users\\krish\\eclipse-workspace\\amazon\\image\\"+im+".jpeg");
 		Files.copy(sc, imgPath);
@@ -36,12 +34,9 @@ public class amazonClass {
 	public static void jsscroll(WebElement ele) {
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView()",ele);
-		
-		
-		
-		
 	}
-	public static void main(String[] args) throws IOException {
+	
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		driver=new ChromeDriver();
 		
@@ -52,7 +47,7 @@ public class amazonClass {
 		screenshot("cs");
 		
 		WebElement cs = driver.findElement(By.xpath("//button[text()='Continue shopping']"));
-		screenshotusingelement(cs, "Lalu");
+		screenshot(cs, "Lalu");
 		cs.click();
 		
 		WebElement bs = driver.findElement(By.xpath("//a[text()='Bestsellers']"));
@@ -68,7 +63,7 @@ public class amazonClass {
 		
 		
 		
-
-		
+		Thread.sleep(5000);
+		driver.quit();
 	}
 }
